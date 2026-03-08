@@ -15,88 +15,53 @@
             --border-tan: #cdc4ad;
         }
 
-        * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
         body {
             font-family: 'Open Sans', sans-serif;
-            background-color: #ffffff;
             margin: 0;
             padding: 0;
+            background-color: #fff;
             color: var(--dark-green);
         }
 
-        /* Header Section */
+        /* --- Header & Typography --- */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 15px 20px;
-            background: white;
         }
 
-        .logo-container img {
-            height: 45px;
-            width: auto;
-        }
+        .logo img { height: 45px; }
 
-        .header-text {
-            text-align: right;
-        }
-
-        .header-text h1 {
+        .header-titles { text-align: right; }
+        .header-titles h1 {
             font-family: 'Montserrat', sans-serif;
             font-weight: 800;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             margin: 0;
-            letter-spacing: 0.5px;
             color: var(--dark-green);
         }
-
-        .header-text p {
+        .header-titles h2 {
             font-family: 'Montserrat', sans-serif;
             font-weight: 400;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             margin: 0;
             color: var(--olive-green);
             text-transform: uppercase;
         }
 
-        /* Progress Bar Area */
-        .progress-wrapper {
-            padding: 5px 20px 15px;
-        }
+        /* --- Progress Bar --- */
+        .progress-section { padding: 0 20px 15px; }
+        .progress-segments { display: flex; gap: 4px; height: 6px; margin-bottom: 5px; }
+        .segment { flex: 1; background: var(--light-gray); border-radius: 2px; }
+        .segment.active { background: var(--progress-yellow); }
+        .step-text { text-align: center; font-size: 11px; color: #666; }
 
-        .progress-segments {
-            display: flex;
-            gap: 4px;
-            height: 6px;
-        }
-
-        .segment {
-            flex: 1;
-            background: var(--light-gray);
-            border-radius: 2px;
-        }
-
-        .segment.active {
-            background: var(--progress-yellow);
-        }
-
-        .step-indicator {
-            text-align: center;
-            font-size: 11px;
-            margin-top: 6px;
-            color: #333;
-        }
-
-        /* Main Content */
-        .main-container {
+        /* --- Main Content Area --- */
+        #app-container {
             background-color: var(--bg-tan);
-            padding: 30px 20px 60px;
-            min-height: calc(100vh - 120px);
+            min-height: 80vh;
+            padding: 30px 20px;
         }
 
         .step-label {
@@ -105,33 +70,27 @@
             font-size: 11px;
             color: var(--olive-green);
             text-transform: uppercase;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             display: block;
         }
 
         .question-title {
             font-family: 'Montserrat', sans-serif;
             font-weight: 800;
-            font-size: 2.1rem;
+            font-size: 2rem;
             line-height: 1.1;
             margin: 0 0 10px 0;
-            color: var(--dark-green);
         }
 
-        .description {
-            font-size: 14px;
-            line-height: 1.4;
-            margin-bottom: 30px;
-            color: var(--dark-green);
-        }
+        .description { font-size: 14px; margin-bottom: 25px; line-height: 1.4; }
 
-        /* Input Card Area */
+        /* --- The White Card --- */
         .input-card {
             background: white;
             border: 1px solid var(--border-tan);
             border-radius: 16px;
             padding: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
         .input-card label {
@@ -140,101 +99,147 @@
             font-size: 10px;
             color: var(--olive-green);
             text-transform: uppercase;
+            margin-bottom: 10px;
             display: block;
-            margin-bottom: 12px;
         }
 
-        input[type="date"], input[type="text"] {
+        input[type="text"], input[type="date"], select {
             width: 100%;
             padding: 12px;
             border: 1px solid var(--border-tan);
             border-radius: 8px;
-            font-size: 18px;
-            color: #333;
-            font-family: inherit;
+            font-size: 16px;
+            outline: none;
         }
 
-        /* Hide logic for steps */
-        .step { display: none; }
-        .step.active { display: block; }
-
-        .button-group {
-            margin-top: 30px;
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn {
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 700;
+        .options-container { display: flex; flex-direction: column; gap: 10px; }
+        .option-btn {
+            padding: 15px;
+            border: 1px solid var(--border-tan);
+            background: white;
+            border-radius: 10px;
+            text-align: left;
+            font-weight: 600;
             cursor: pointer;
-            border: none;
-            flex: 1;
         }
+        .option-btn.selected { background: var(--dark-green); color: white; border-color: var(--dark-green); }
 
+        .nav-buttons { margin-top: 30px; display: flex; gap: 10px; }
+        .btn {
+            flex: 1;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+        }
         .btn-next { background: var(--dark-green); color: white; }
-        .btn-back { background: transparent; border: 1px solid var(--dark-green); color: var(--dark-green); }
+        .btn-back { background: transparent; color: var(--dark-green); border: 1px solid var(--dark-green); }
     </style>
 </head>
 <body>
 
     <header class="header">
-        <div class="logo-container">
+        <div class="logo">
             <img src="https://nirvanaliving.github.io/nl-apps/infection-tracker/logo.png" alt="Nirvana Living">
         </div>
-        <div class="header-text">
+        <div class="header-titles">
             <h1>INFECTION TRACKER</h1>
-            <p>Cold & Flu Health Log</p>
+            <h2>COLD & FLU HEALTH LOG</h2>
         </div>
     </header>
 
-    <div class="progress-wrapper">
-        <div class="progress-segments">
-            <div class="segment active"></div>
-            <div class="segment"></div>
-            <div class="segment"></div>
-            <div class="segment"></div>
-            <div class="segment"></div>
-            <div class="segment"></div>
-        </div>
-        <div class="step-indicator">Step 1 of 6</div>
+    <div class="progress-section" id="progress-bar-container"></div>
+
+    <div id="app-container">
+        <div id="question-container"></div>
+        <div class="nav-buttons" id="nav-buttons"></div>
     </div>
 
-    <main class="main-container">
-        <div class="step active" id="step1">
-            <span class="step-label">Step 01 — Episode Start</span>
-            <h2 class="question-title">When did symptoms begin?</h2>
-            <p class="description">Track and determine when, and how often, you get a cold or flu each year.</p>
-            
-            <div class="input-card">
-                <label for="startDate">Symptom Start Date</label>
-                <input type="text" id="startDate" placeholder="MM / DD / YYYY" onfocus="(this.type='date')">
-            </div>
-
-            <div class="button-group">
-                <button class="btn btn-next" onclick="nextStep(2)">Next Step</button>
-            </div>
-        </div>
-
-        </main>
-
     <script>
-        function nextStep(stepNumber) {
-            // Basic transition logic
-            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-            const next = document.getElementById('step' + stepNumber);
-            if(next) next.classList.add('active');
-            
-            // Update segments
-            const segments = document.querySelectorAll('.segment');
-            segments.forEach((seg, index) => {
-                if(index < stepNumber) seg.classList.add('active');
-                else seg.classList.remove('active');
-            });
+        const questions = [
+            { id: 'start_date', question: 'When did symptoms begin?', type: 'date', label: 'Symptom Start Date', description: 'Track and determine when, and how often, you get a cold or flu each year.' },
+            { id: 'type', question: 'What are you tracking?', type: 'select', options: ['Cold', 'Flu', 'Other Infection'], description: 'Select the type of illness you are experiencing.' },
+            { id: 'severity', question: 'How severe are symptoms?', type: 'select', options: ['Mild', 'Moderate', 'Severe'], description: 'Rate the impact on your daily activities.' }
+            // Add more questions here as per your original logic
+        ];
 
-            document.querySelector('.step-indicator').innerText = `Step ${stepNumber} of 6`;
+        let currentStep = 0;
+        let responses = {};
+
+        function renderProgressBar() {
+            const container = document.getElementById('progress-bar-container');
+            let segments = '';
+            for (let i = 0; i < questions.length; i++) {
+                segments += `<div class="segment ${i <= currentStep ? 'active' : ''}"></div>`;
+            }
+            container.innerHTML = `
+                <div class="progress-segments">${segments}</div>
+                <div class="step-text">Step ${currentStep + 1} of ${questions.length}</div>
+            `;
         }
+
+        function showQuestion() {
+            const q = questions[currentStep];
+            const container = document.getElementById('question-container');
+            const nav = document.getElementById('nav-buttons');
+            
+            renderProgressBar();
+
+            let inputHtml = '';
+            if (q.type === 'date') {
+                inputHtml = `<div class="input-card">
+                                <label>${q.label}</label>
+                                <input type="text" placeholder="MM / DD / YYYY" onfocus="(this.type='date')" id="input-${q.id}" value="${responses[q.id] || ''}">
+                             </div>`;
+            } else if (q.type === 'select') {
+                inputHtml = `<div class="options-container">
+                    ${q.options.map(opt => `
+                        <button class="option-btn ${responses[q.id] === opt ? 'selected' : ''}" onclick="saveResponse('${q.id}', '${opt}')">${opt}</button>
+                    `).join('')}
+                </div>`;
+            }
+
+            container.innerHTML = `
+                <span class="step-label">Step 0${currentStep + 1} — ${q.id.replace('_', ' ')}</span>
+                <h1 class="question-title">${q.question}</h1>
+                <p class="description">${q.description}</p>
+                ${inputHtml}
+            `;
+
+            nav.innerHTML = `
+                ${currentStep > 0 ? `<button class="btn btn-back" onclick="prevStep()">Back</button>` : ''}
+                <button class="btn btn-next" onclick="nextStep()">${currentStep === questions.length - 1 ? 'Finish' : 'Next Step'}</button>
+            `;
+        }
+
+        function saveResponse(id, value) {
+            responses[id] = value;
+            showQuestion(); // Re-render to show selection
+        }
+
+        function nextStep() {
+            const q = questions[currentStep];
+            const input = document.getElementById(`input-${q.id}`);
+            if (input) responses[q.id] = input.value;
+
+            if (currentStep < questions.length - 1) {
+                currentStep++;
+                showQuestion();
+            } else {
+                alert("Tracker Complete! Responses: " + JSON.stringify(responses));
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 0) {
+                currentStep--;
+                showQuestion();
+            }
+        }
+
+        // Initialize
+        showQuestion();
     </script>
 </body>
 </html>
